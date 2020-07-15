@@ -8,6 +8,7 @@ import android.net.wifi.WifiManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.mridx.share.ui.Receive;
 import com.mridx.share.ui.Test;
 
 import java.io.BufferedReader;
@@ -47,13 +48,16 @@ public class WiFiReceiver extends BroadcastReceiver {
             context.startService(new Intent(context, WiFiActiveService.class));
         } else if ("android.net.wifi.WIFI_AP_STATE_CHANGED".equals(action)) {
             Log.d(TAG, "onReceive: wifi ap changed");
+            if (context instanceof Receive) {
+                ((Receive) context).connectToServer();
+            }
         } else if ("android.net.wifi.WIFI_HOTSPOT_CLIENTS_CHANGED".equals(action)) {
             Log.d(TAG, "onReceive: client changed");
             //((Test) context).getConnectedClientList();
             //onClientChanged.onClientChanged();
             //getConnectedClientList(context);
             if (context instanceof Test) {
-                ((Test)context).getConnectedClientList();
+                ((Test) context).getConnectedClientList();
             }
         }
     }

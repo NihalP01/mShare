@@ -13,6 +13,9 @@
         android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions"/>
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
 
@@ -26,13 +29,16 @@
         tools:overrideLibrary="com.google.zxing.client.android"
         android:hardwareAccelerated="true"
         >
-        <activity android:name=".ui.Test">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.Receive" />
+        <activity android:name=".ui.Send" />
+
         <receiver android:name=".misc.WiFiReceiver">
             <intent-filter>
                 <action android:name="android.net.wifi.WIFI_AP_STATE_CHANGED" />

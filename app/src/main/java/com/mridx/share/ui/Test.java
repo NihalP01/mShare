@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.DhcpInfo;
 import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
@@ -38,6 +39,8 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.mridx.share.R;
+import com.mridx.share.misc.ClientThread;
+import com.mridx.share.misc.ServerThread;
 import com.mridx.share.misc.WiFiBroadcastReceiver;
 import com.mridx.share.misc.WiFiReceiver;
 
@@ -45,9 +48,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.Enumeration;
 import java.util.List;
 
 public class Test extends AppCompatActivity implements WifiP2pManager.PeerListListener, WiFiReceiver.OnClientChanged {
@@ -63,8 +69,13 @@ public class Test extends AppCompatActivity implements WifiP2pManager.PeerListLi
     WifiManager wifiManager;
     WifiManager.LocalOnlyHotspotReservation mReservation;
 
+    BottomSheetDialog qrViewer;
+
 
     IntentFilter intentFilter;
+
+    boolean isClient = false;
+    private Thread serverThread;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,6 +93,9 @@ public class Test extends AppCompatActivity implements WifiP2pManager.PeerListLi
         intentFilter.addAction("android.net.wifi.WIFI_HOTSPOT_CLIENTS_CHANGED");
 
         new WiFiReceiver().setOnClientChanged(this);
+
+        serverThread = new Thread(new ServerThread("", this));
+        serverThread.start();
 
 
         /*manager = (WifiP2pManager) getSystemService(WIFI_P2P_SERVICE);
@@ -137,6 +151,7 @@ public class Test extends AppCompatActivity implements WifiP2pManager.PeerListLi
     }
 
     private void connectToNetwork(String contents) {
+        isClient = true;
         String[] data = contents.split("/");
         String name = data[0];
         String password = data[1];
@@ -340,10 +355,10 @@ public class Test extends AppCompatActivity implements WifiP2pManager.PeerListLi
     }
 
     private void showQR(Bitmap bmp) {
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
-        bottomSheetDialog.setContentView(R.layout.qr_view);
-        bottomSheetDialog.show();
-        ((AppCompatImageView) bottomSheetDialog.findViewById(R.id.qrView)).setImageBitmap(bmp);
+        qrViewer = new BottomSheetDialog(this);
+        qrViewer.setContentView(R.layout.qr_view);
+        qrViewer.show();
+        ((AppCompatImageView) qrViewer.findViewById(R.id.qrView)).setImageBitmap(bmp);
     }
 
     private void turnOffHotspot() {
@@ -352,8 +367,9 @@ public class Test extends AppCompatActivity implements WifiP2pManager.PeerListLi
         }
     }
 
+
     public void getConnectedClientList() {
-        int clientcount = 0;
+        /*int clientcount = 0;
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader("/proc/net/arp"));
@@ -377,12 +393,53 @@ public class Test extends AppCompatActivity implements WifiP2pManager.PeerListLi
 
         } catch (Exception e) {
             e.printStackTrace();
+        }*/
+        qrViewer.dismiss();
+        String serverIP = getLocalIpAddress();
+        //startServer(serverIP);
+    }
+
+    private void startServer(String serverIP) {
+        Thread thread = new Thread(new ServerThread(serverIP, this));
+        thread.start();
+    }
+
+    private String getLocalIpAddress() {
+        try {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
+                NetworkInterface intf = en.nextElement();
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    if (!inetAddress.isLoopbackAddress()) {
+                        return inetAddress.getHostAddress().toString();
+                    }
+                }
+            }
+        } catch (SocketException ex) {
+            Log.e("ServerActivity", ex.toString());
         }
+        return null;
     }
 
     @Override
     public void onClientChanged() {
         Log.d(TAG, "onClientChanged: ahixi bal");
         getConnectedClientList();
+    }
+
+    public void connectToServer() {
+        if (!isClient)
+            return;
+        final WifiManager manager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+        final DhcpInfo dhcp = manager.getDhcpInfo();
+        final String address = Formatter.formatIpAddress(dhcp.gateway);
+        Thread clientThread = new Thread(new ClientThread(address));
+        clientThread.start();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        serverThread.interrupt();
     }
 }
