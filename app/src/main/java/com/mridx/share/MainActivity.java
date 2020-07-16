@@ -7,8 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.mridx.share.ui.Receive;
+import com.mridx.share.ui.ReceiveMulticast;
 import com.mridx.share.ui.Send;
+import com.mridx.share.ui.SendMulticast;
 import com.mridx.share.ui.Test;
+import com.mridx.share.ui.UniTransfer;
+import com.mridx.share.ui.UniTransfer1;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void send(View view) {
-        startActivity(new Intent(this, Send.class));
+        startActivity(new Intent(this, UniTransfer.class));
 
     }
     public void receive(View view) {
-        startActivity(new Intent(this, Receive.class));
+        startActivity(new Intent(this, UniTransfer1.class));
 
     }
 }

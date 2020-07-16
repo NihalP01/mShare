@@ -10,6 +10,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.format.Formatter;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -17,16 +18,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.mridx.share.R;
 import com.mridx.share.misc.ClientThread;
 import com.mridx.share.misc.WiFiReceiver;
 
 import java.util.List;
 
-public class Receive extends AppCompatActivity {
+public class ReceiveMulticast extends AppCompatActivity {
 
-    public boolean isClient = true;
     private WifiManager wifiManager;
     private BroadcastReceiver receiver;
     private IntentFilter intentFilter;
@@ -47,12 +46,6 @@ public class Receive extends AppCompatActivity {
         intentFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
         intentFilter.addAction("android.net.wifi.WIFI_AP_STATE_CHANGED");
         intentFilter.addAction("android.net.wifi.WIFI_HOTSPOT_CLIENTS_CHANGED");
-
-        new Test().getConnectedClientList();
-
-        Thread clientThread = new Thread(new ClientThread(this, ""));
-        clientThread.start();
-
     }
 
     private void startReceiving() {
@@ -64,7 +57,6 @@ public class Receive extends AppCompatActivity {
     }
 
     private void connectToNetwork(String contents) {
-        isClient = true;
         String[] data = contents.split("/");
         String name = data[0];
         String password = data[1];
@@ -99,7 +91,6 @@ public class Receive extends AppCompatActivity {
         return wifiManager.getConnectionInfo().getSSID().equals(name);
     }
 
-
     private synchronized void createWPAProfile(String name, String password) {
         WifiConfiguration configuration = new WifiConfiguration();
         configuration.SSID = "\"" + name + "\"";
@@ -114,29 +105,12 @@ public class Receive extends AppCompatActivity {
         wifiManager.reconnect();
     }
 
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null) {
-            if (result.getContents() == null) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
-            } else {
-                connectToNetwork(result.getContents());
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
     public void connectToServer() {
-        if (!isClient)
-            return;
         final WifiManager manager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
         final DhcpInfo dhcp = manager.getDhcpInfo();
         final String address = Formatter.formatIpAddress(dhcp.serverAddress);
-        //Thread clientThread = new Thread(new ClientThread(this, address));
-        //clientThread.start();
+        Thread clientThread = new Thread(new ClientThread(this, address));
+        clientThread.start();
     }
 
     @Override
@@ -150,4 +124,9 @@ public class Receive extends AppCompatActivity {
         super.onPause();
         unregisterReceiver(receiver);
     }
+
+    public void startChat(View view) {
+        startActivity(new Intent(this, Chat.class));
+    }
+
 }

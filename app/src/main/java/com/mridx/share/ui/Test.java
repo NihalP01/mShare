@@ -369,7 +369,7 @@ public class Test extends AppCompatActivity implements WifiP2pManager.PeerListLi
 
 
     public void getConnectedClientList() {
-        /*int clientcount = 0;
+        int clientcount = 0;
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader("/proc/net/arp"));
@@ -382,10 +382,10 @@ public class Test extends AppCompatActivity implements WifiP2pManager.PeerListLi
                     clientcount++;
                     System.out.println("Mac : " + mac + " IP Address : " + splitted[0]);
                     System.out.println("Client_count  " + clientcount + " MAC_ADDRESS  " + mac);
-                    Toast.makeText(
+                    /*Toast.makeText(
                             getApplicationContext(),
                             "Client_count  " + clientcount + "   MAC_ADDRESS  "
-                                    + mac, Toast.LENGTH_SHORT).show();
+                                    + mac, Toast.LENGTH_SHORT).show();*/
                     Log.d(TAG, "getConnectedClientList: " + "Mac : " + mac + " IP Address : " + splitted[0]);
                     Log.d(TAG, "getConnectedClientList: " + "Client_count  " + clientcount + " MAC_ADDRESS  " + mac);
                 }
@@ -393,9 +393,9 @@ public class Test extends AppCompatActivity implements WifiP2pManager.PeerListLi
 
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
-        qrViewer.dismiss();
-        String serverIP = getLocalIpAddress();
+        }
+        //qrViewer.dismiss();
+        //String serverIP = getLocalIpAddress();
         //startServer(serverIP);
     }
 

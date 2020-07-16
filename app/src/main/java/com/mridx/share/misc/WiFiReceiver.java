@@ -9,6 +9,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.mridx.share.ui.Receive;
+import com.mridx.share.ui.ReceiveMulticast;
+import com.mridx.share.ui.SendMulticast;
 import com.mridx.share.ui.Test;
 
 import java.io.BufferedReader;
@@ -51,6 +53,8 @@ public class WiFiReceiver extends BroadcastReceiver {
             if (context instanceof Receive) {
                 ((Receive) context).connectToServer();
             }
+            if (context instanceof ReceiveMulticast)
+                Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show();
         } else if ("android.net.wifi.WIFI_HOTSPOT_CLIENTS_CHANGED".equals(action)) {
             Log.d(TAG, "onReceive: client changed");
             //((Test) context).getConnectedClientList();
@@ -58,6 +62,9 @@ public class WiFiReceiver extends BroadcastReceiver {
             //getConnectedClientList(context);
             if (context instanceof Test) {
                 ((Test) context).getConnectedClientList();
+            }
+            if (context instanceof SendMulticast) {
+                Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show();
             }
         }
     }

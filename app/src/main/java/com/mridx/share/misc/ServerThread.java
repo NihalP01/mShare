@@ -9,17 +9,21 @@ import android.util.Log;
 
 import androidx.core.content.ContentResolverCompat;
 
+import com.mridx.share.ui.Send;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Date;
 
 public class ServerThread implements Runnable {
 
@@ -32,7 +36,7 @@ public class ServerThread implements Runnable {
     private Socket client;
 
     public ServerThread(String serverIp, Context context) {
-        //this.serverIp = serverIp;
+        this.serverIp = serverIp;
         this.context = context;
     }
 
@@ -49,17 +53,24 @@ public class ServerThread implements Runnable {
     @Override
     public void run() {
         try {
-            serverSocket = new ServerSocket(serverPort);
+            if (serverIp.equalsIgnoreCase("0")) {
+                serverSocket = new ServerSocket(serverPort+1);
+            } else {
+                serverSocket = new ServerSocket(serverPort);
+            }
 
             while (true) {
                 client = serverSocket.accept();
-                Thread transferThread = new Thread(new FileTransferThread(context, client));
-                transferThread.start();
+               /* Thread transferThread = new Thread(new FileTransferThread(context, client));
+                transferThread.start();*/
+
+                startCheckingForReceiveFile(client);
+
             }
 
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
+        } /*finally {
             if (client != null) {
                 try {
                     client.close();
@@ -68,6 +79,23 @@ public class ServerThread implements Runnable {
                     e.printStackTrace();
                 }
             }
+        }*/
+
+    }
+
+    private void startCheckingForReceiveFile(Socket client) {
+
+        try {
+            if (client.getInputStream() != null) {
+                File file = new File(Environment.getExternalStorageDirectory(), new Date().getTime() + (serverIp.equalsIgnoreCase("0") ? ".apk" : ".mp4"));
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+                copyFile(client.getInputStream(), new FileOutputStream(file));
+                Log.d(TAG, "startCheckingForReceiveFile: File downloaded");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
@@ -86,20 +114,12 @@ public class ServerThread implements Runnable {
         public void run() {
 
             try {
-                File file = new File(Environment.getExternalStorageDirectory(), "app-release.apk");
+                File file = new File(Environment.getExternalStorageDirectory(), "file1.mp4");
                 ContentResolver contentResolver = context.getContentResolver();
                 InputStream inputStream = contentResolver.openInputStream(Uri.fromFile(file));
                 OutputStream outputStream = socket.getOutputStream();
                 copyFile(inputStream, outputStream);
-                /*byte[] bytes = new byte[(int) file.length()];
-                BufferedInputStream bis;
-
-                bis = new BufferedInputStream(new FileInputStream(file));
-                bis.read(bytes, 0, bytes.length);
-                OutputStream outputStream = socket.getOutputStream();
-                outputStream.write(bytes, 0, bytes.length);
-                outputStream.flush();*/
-                socket.close();
+                //socket.close();
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
