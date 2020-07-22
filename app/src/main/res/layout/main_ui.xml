@@ -20,6 +20,8 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:theme="@style/AppTheme.Toolbar"
+            android:gravity="center_vertical"
+            app:layout_collapseMode="pin"
             app:layout_scrollFlags="scroll|enterAlways"
             app:title="@string/app_name" />
     </com.google.android.material.appbar.AppBarLayout>
@@ -29,11 +31,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/darkGray"
+        android:minHeight="?actionBarSize"
+        app:tabGravity="fill"
+        app:tabIndicatorHeight="4dp"
+        app:tabBackground="@color/colorPrimary"
+        app:tabMode="fixed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        app:layout_constraintVertical_bias="0.0" />
-
+        app:layout_constraintVertical_bias="0.0"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
