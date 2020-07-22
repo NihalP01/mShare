@@ -34,8 +34,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     testImplementation 'junit:junit:4.12'
 
-   androidTestImplementation 'androidx.start_activity.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.start_activity.espresso:espresso-core:3.2.0'
+ /*  androidTestImplementation 'androidx.start_activity.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.start_activity.espresso:espresso-core:3.2.0'*/
 
     implementation('com.journeyapps:zxing-android-embedded:4.1.0') { transitive = false }
     implementation 'com.google.zxing:core:3.3.0'
