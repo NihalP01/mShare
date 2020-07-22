@@ -1,4 +1,4 @@
-package com.mridx.share.ui;
+package com.mridx.test.ui;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,8 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mridx.share.R;
-import com.mridx.share.misc.ClientThread;
-import com.mridx.share.misc.ServerThread;
+import com.mridx.test.misc.ClientThread;
+import com.mridx.test.misc.ServerThread;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

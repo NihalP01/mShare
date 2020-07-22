@@ -6,13 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.mridx.share.ui.Receive;
-import com.mridx.share.ui.ReceiveMulticast;
-import com.mridx.share.ui.Send;
-import com.mridx.share.ui.SendMulticast;
-import com.mridx.share.ui.Test;
-import com.mridx.share.ui.UniTransfer;
-import com.mridx.share.ui.UniTransfer1;
+import com.mridx.share.ui.SenderClient;
+import com.mridx.share.ui.SenderHost;
+import com.mridx.test.ui.UniTransfer;
+import com.mridx.test.ui.UniTransfer1;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,15 +19,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
     }
 
     public void send(View view) {
-        startActivity(new Intent(this, UniTransfer.class));
+        startActivity(new Intent(this, SenderHost.class));
 
     }
+
     public void receive(View view) {
-        startActivity(new Intent(this, UniTransfer1.class));
+        startActivity(new Intent(this, SenderClient.class));
 
     }
 }

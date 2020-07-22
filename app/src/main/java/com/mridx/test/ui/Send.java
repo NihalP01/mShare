@@ -1,4 +1,4 @@
-package com.mridx.share.ui;
+package com.mridx.test.ui;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -26,8 +26,8 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.mridx.share.R;
-import com.mridx.share.misc.ServerThread;
-import com.mridx.share.misc.WiFiReceiver;
+import com.mridx.test.misc.ServerThread;
+import com.mridx.test.misc.WiFiReceiver;
 
 import java.lang.reflect.Method;
 import java.net.InetAddress;

@@ -1,22 +1,19 @@
-package com.mridx.share.misc;
+package com.mridx.test.misc;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.mridx.share.ui.Receive;
-import com.mridx.share.ui.ReceiveMulticast;
-import com.mridx.share.ui.SendMulticast;
-import com.mridx.share.ui.Test;
+import com.mridx.test.ui.Receive;
+import com.mridx.test.ui.ReceiveMulticast;
+import com.mridx.test.ui.SendMulticast;
+import com.mridx.test.ui.Test;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class WiFiReceiver extends BroadcastReceiver {
 

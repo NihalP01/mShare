@@ -1,15 +1,12 @@
-package com.mridx.share.ui;
+package com.mridx.test.ui;
 
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;

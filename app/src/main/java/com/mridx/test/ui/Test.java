@@ -1,4 +1,4 @@
-package com.mridx.share.ui;
+package com.mridx.test.ui;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
@@ -39,10 +39,9 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.mridx.share.R;
-import com.mridx.share.misc.ClientThread;
-import com.mridx.share.misc.ServerThread;
-import com.mridx.share.misc.WiFiBroadcastReceiver;
-import com.mridx.share.misc.WiFiReceiver;
+import com.mridx.test.misc.ClientThread;
+import com.mridx.test.misc.ServerThread;
+import com.mridx.test.misc.WiFiReceiver;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

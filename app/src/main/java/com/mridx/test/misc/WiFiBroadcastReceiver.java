@@ -1,4 +1,4 @@
-package com.mridx.share.misc;
+package com.mridx.test.misc;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
@@ -10,7 +10,7 @@ import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 
-import com.mridx.share.ui.Test;
+import com.mridx.test.ui.Test;
 
 public class WiFiBroadcastReceiver extends BroadcastReceiver {
 

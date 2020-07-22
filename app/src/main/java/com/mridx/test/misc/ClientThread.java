@@ -1,28 +1,17 @@
-package com.mridx.share.misc;
+package com.mridx.test.misc;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Environment;
-import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.mridx.share.ui.Receive;
-
-import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class ClientThread implements Runnable {
 
