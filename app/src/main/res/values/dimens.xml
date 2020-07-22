@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <dimen name="startPageCardSize">100dp</dimen>
+    <dimen name="startPageCardIconSize">40dp</dimen>
+    <dimen name="startPageCardTextSize">16sp</dimen>
+    <dimen name="startPageCardElev">5dp</dimen>
+</resources>
