@@ -38,7 +38,6 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.mridx.share.R;
-import com.mridx.share.misc.WiFiBroadcastReceiver;
 import com.mridx.share.misc.WiFiReceiver;
 
 import java.io.BufferedReader;
@@ -69,11 +68,11 @@ public class Test extends AppCompatActivity implements WifiP2pManager.PeerListLi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test);
+        setContentView(R.layout.start_activity);
 
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        findViewById(R.id.startHP).setOnClickListener(view -> turnOnHotspot(wifiManager));
-        findViewById(R.id.connect).setOnClickListener(view -> getConnectedHotspot());
+        findViewById(R.id.btn_create).setOnClickListener(view -> turnOnHotspot(wifiManager));
+        findViewById(R.id.btn_join).setOnClickListener(view -> getConnectedHotspot());
 
         receiver = new WiFiReceiver();
         intentFilter = new IntentFilter();
