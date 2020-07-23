@@ -31,7 +31,7 @@
         app:layout_constraintVertical_bias="0.8">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/btn_create"
+            android:id="@+id/createCard"
             style="@style/MyCardView.50"
             android:layout_width="@dimen/startPageCardSize"
             android:layout_height="@dimen/startPageCardSize"
@@ -41,7 +41,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/mainDiv"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -89,7 +90,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/btn_join"
+            android:id="@+id/joinCard"
             style="@style/MyCardView.50"
             android:layout_width="@dimen/startPageCardSize"
             android:layout_height="@dimen/startPageCardSize"
