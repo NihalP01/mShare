@@ -4,4 +4,7 @@
     <dimen name="startPageCardIconSize">40dp</dimen>
     <dimen name="startPageCardTextSize">16sp</dimen>
     <dimen name="startPageCardElev">5dp</dimen>
+    
+    <dimen name="searchBoxHeight">56dp</dimen>
+    <dimen name="layoutMargin">20dp</dimen>
 </resources>

@@ -22,7 +22,7 @@ public class StartUI extends AppCompatActivity {
     }
 
     public void startHost(View view) {
-        startActivity(new Intent(this, SenderHost.class));
+        startActivity(new Intent(this, /*SenderHost.class*/ MainUI.class));
 
     }
 

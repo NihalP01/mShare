@@ -47,6 +47,7 @@
 
         <activity android:name=".ui.SenderClient" />
         <activity android:name=".ui.SenderHost" />
+        <activity android:name=".ui.MainUI" />
 
         <receiver android:name="com.mridx.test.misc.WiFiReceiver">
             <intent-filter>

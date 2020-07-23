@@ -26,5 +26,7 @@
 
 
     <!-- custom colors -->
+    <color name="lightWhite">#E3E0E0</color>
+    <color name="lightPrimary">#5FCFD6</color>
 
 </resources>
