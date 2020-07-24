@@ -45,9 +45,16 @@
         <activity android:name="com.mridx.test.ui.Chat" />
 
 
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="portrait"
+            tools:replace="screenOrientation" />
+
+
         <activity android:name=".ui.SenderClient" />
         <activity android:name=".ui.SenderHost" />
         <activity android:name=".ui.MainUI" />
+        <activity android:name=".ui.JoinUI" />
 
         <receiver android:name="com.mridx.test.misc.WiFiReceiver">
             <intent-filter>
