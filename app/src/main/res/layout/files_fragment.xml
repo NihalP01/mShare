@@ -16,7 +16,6 @@
             android:background="@drawable/rounded_searchbar"
             android:drawableStart="@drawable/ic_search"
             android:elevation="5dp"
-            android:hint="Search here"
             android:paddingStart="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -203,5 +202,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </FrameLayout>

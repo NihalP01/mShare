@@ -29,7 +29,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.FullScreen"
         tools:overrideLibrary="com.google.zxing.client.android">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.StartUI">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,6 +47,7 @@
 
         <activity android:name=".ui.SenderClient" />
         <activity android:name=".ui.SenderHost" />
+        <activity android:name=".ui.MainUI" />
 
         <receiver android:name="com.mridx.test.misc.WiFiReceiver">
             <intent-filter>
