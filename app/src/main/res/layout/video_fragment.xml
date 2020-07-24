@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/audioSearchBar"
+            android:id="@+id/videoSearchBar"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:layout_margin="10dp"
             android:paddingStart="6dp"
             android:background="@drawable/rounded_searchbar"
             android:elevation="5dp"
-            android:hint="Search music"
+            android:hint="Search Videos"
             android:drawableStart="@drawable/ic_search"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,16 +26,16 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/musicHolder"
-            android:layout_width="0dp"
+            android:id="@+id/videoHolder"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
+            android:padding="5dp"
+            tools:listitem="@layout/video_view"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/audioSearchBar"
-            tools:itemCount="15"
-            tools:listitem="@layout/music_view" />
+            app:layout_constraintTop_toBottomOf="@+id/videoSearchBar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

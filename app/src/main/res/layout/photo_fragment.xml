@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/photoSearchBar"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_margin="10dp"
+        android:hint="Search files"
+        android:background="@drawable/rounded_searchbar"
+        android:drawableStart="@drawable/ic_search"
+        android:elevation="5dp"
+        android:paddingStart="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/photoHolder"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:paddingStart="10dp"
+          android:paddingEnd="0dp"
+          tools:listitem="@layout/photo_view"
+          app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+          app:spanCount="3"
+          tools:itemCount="15"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/photoSearchBar" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

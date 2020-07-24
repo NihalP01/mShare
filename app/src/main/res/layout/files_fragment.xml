@@ -9,14 +9,16 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/file_searchBar"
+            android:id="@+id/fileSearchBar"
             android:layout_width="match_parent"
-            android:layout_height="38dp"
+            android:layout_height="42dp"
             android:layout_margin="10dp"
+            android:hint="Search files"
             android:background="@drawable/rounded_searchbar"
             android:drawableStart="@drawable/ic_search"
             android:elevation="5dp"
             android:paddingStart="6dp"
+            android:paddingEnd="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +26,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/phone_storage"
+            android:id="@+id/phoneStorageContainer"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginTop="8dp"
@@ -32,7 +34,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/file_searchBar"
+            app:layout_constraintTop_toBottomOf="@+id/fileSearchBar"
             app:layout_constraintVertical_bias="0.04">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -64,7 +66,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/phone_total_storage"
+                android:id="@+id/phoneStorageTotal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -86,7 +88,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/phone_total_available"
+                android:id="@+id/phoneStorageAvailable"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -98,7 +100,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <com.google.android.material.progressindicator.ProgressIndicator
-                android:id="@+id/phone_progressBar"
+                android:id="@+id/phoneStorageProgressBar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -107,13 +109,13 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
-                app:layout_constraintTop_toBottomOf="@+id/phone_total_storage"
+                app:layout_constraintTop_toBottomOf="@+id/phoneStorageTotal"
                 app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/my_sd_card"
+            android:id="@+id/sdCardContainer"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginTop="12dp"
@@ -121,7 +123,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phone_storage"
+            app:layout_constraintTop_toBottomOf="@+id/phoneStorageContainer"
             app:layout_constraintVertical_bias="0.0">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -153,7 +155,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/sd_total_storage"
+                android:id="@+id/sdCardTotal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -175,7 +177,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/sd_total_available"
+                android:id="@+id/sdCardAvailable"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -187,7 +189,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <com.google.android.material.progressindicator.ProgressIndicator
-                android:id="@+id/sd_progressBar"
+                android:id="@+id/sdCardProgressBar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -196,7 +198,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/icon_sdCard"
-                app:layout_constraintTop_toBottomOf="@+id/sd_total_storage"
+                app:layout_constraintTop_toBottomOf="@+id/sdCardTotal"
                 app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

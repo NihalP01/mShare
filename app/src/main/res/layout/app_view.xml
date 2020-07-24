@@ -7,7 +7,7 @@
     android:padding="8dp">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/appCompatImageView3"
+        android:id="@+id/appIconView"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:src="@drawable/ic_radio"
@@ -19,28 +19,29 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/materialTextView4"
+        android:id="@+id/appName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="App Name"
         android:layout_marginTop="2dp"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView3"
-        app:layout_constraintStart_toStartOf="@+id/appCompatImageView3"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView3"
+        app:layout_constraintEnd_toEndOf="@+id/appIconView"
+        app:layout_constraintStart_toStartOf="@+id/appIconView"
+        app:layout_constraintTop_toBottomOf="@+id/appIconView"
         app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/appSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="3.5 MB"
-        android:textSize="12dp"
+        android:textSize="12sp"
         android:textColor="#787878"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/materialTextView4"
-        app:layout_constraintStart_toStartOf="@+id/materialTextView4"
-        app:layout_constraintTop_toBottomOf="@+id/materialTextView4"
+        app:layout_constraintEnd_toEndOf="@+id/appName"
+        app:layout_constraintStart_toStartOf="@+id/appName"
+        app:layout_constraintTop_toBottomOf="@+id/appName"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

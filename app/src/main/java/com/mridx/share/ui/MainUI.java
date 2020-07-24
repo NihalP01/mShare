@@ -28,10 +28,10 @@ public class MainUI extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new Fragment(R.layout.files_fragment), "APP"); // TODO: 23/07/20 change layout
-        viewPagerAdapter.addFragment(new Fragment(R.layout.music_fragment), "PHOTO"); // TODO: 23/07/20 change layout
+        viewPagerAdapter.addFragment(new Fragment(R.layout.app_fragment), "APP"); // TODO: 23/07/20 change layout
+        viewPagerAdapter.addFragment(new Fragment(R.layout.photo_fragment), "PHOTO"); // TODO: 23/07/20 change layout
         viewPagerAdapter.addFragment(new Fragment(R.layout.music_fragment), "MUSIC");
-        viewPagerAdapter.addFragment(new Fragment(R.layout.music_fragment), "VIDEO"); // TODO: 23/07/20 change layout
+        viewPagerAdapter.addFragment(new Fragment(R.layout.video_fragment), "VIDEO"); // TODO: 23/07/20 change layout
         viewPagerAdapter.addFragment(new Fragment(R.layout.files_fragment), "FILE");
 
         viewPager.setAdapter(viewPagerAdapter);
