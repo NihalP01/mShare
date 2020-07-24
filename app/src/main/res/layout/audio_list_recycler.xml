@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,12 +10,14 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/audio_searchBar"
+                android:id="@+id/audioSearchBar"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_margin="10dp"
                 android:paddingStart="6dp"
-                android:background="@drawable/rounded_serachbar"
+                android:paddingEnd="6dp"
+                android:hint="Search here"
+                android:background="@drawable/rounded_searchbar"
                 android:elevation="5dp"
                 android:drawableStart="@drawable/ic_search"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -33,8 +34,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/audio_searchBar"
-                tools:listitem="@layout/audio_list_items" />
+                app:layout_constraintTop_toBottomOf="@+id/audioSearchBar"
+                tools:listitem="@layout/audio_list_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
