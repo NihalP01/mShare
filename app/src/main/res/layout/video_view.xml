@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    >
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/videoThumb"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_video"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/videoName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Video Name"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/videoCheckBox"
+        app:layout_constraintStart_toEndOf="@+id/videoThumb"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/videoSize"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        android:text="5.8 MB"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/videoCheckBox"
+        app:layout_constraintStart_toEndOf="@+id/videoThumb"
+        app:layout_constraintTop_toBottomOf="@+id/videoName"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/videoCheckBox"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:button="@drawable/custom_checkbox"
+        app:layout_constraintBottom_toBottomOf="@+id/videoThumb"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toEndOf="@+id/videoThumb"
+        app:layout_constraintTop_toTopOf="@+id/videoThumb" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
