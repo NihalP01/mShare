@@ -1,11 +1,9 @@
 package com.mridx.share.ui;
 
-import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -16,7 +14,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,8 +21,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -40,60 +35,27 @@ import com.mridx.share.helper.PermissionHelper;
 import com.mridx.test.misc.WiFiReceiver;
 
 import java.lang.reflect.Method;
-import java.util.List;
 
-public class StartUI extends AppCompatActivity {
-
+public class CreateUI extends AppCompatActivity {
 
     private String TAG = "kaku";
-
-    private WifiManager.LocalOnlyHotspotReservation hotspotReservation;
     private WifiManager wifiManager;
+    private WifiManager.LocalOnlyHotspotReservation hotspotReservation;
 
-    private IntentIntegrator scanner;
     private BroadcastReceiver receiver;
     private IntentFilter intentFilter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.start_activity);
 
-        findViewById(R.id.createCard).setOnClickListener(this::startHost);
-        findViewById(R.id.joinCard).setOnClickListener(this::joinHost);
-
-        /*receiver = new WiFiReceiver();
+        receiver = new WiFiReceiver();
         intentFilter = new IntentFilter();
         //intentFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
         //intentFilter.addAction("android.net.wifi.WIFI_AP_STATE_CHANGED");
-        intentFilter.addAction("android.net.wifi.WIFI_HOTSPOT_CLIENTS_CHANGED");*/
+        intentFilter.addAction("android.net.wifi.WIFI_HOTSPOT_CLIENTS_CHANGED");
 
-
-    }
-
-    public void startHost(View view) {
-        //startActivity(new Intent(this, /*SenderHost.class*/ MainUI.class));
-        startActivity(new Intent(this, CreateUI.class));
-        //turnOnHotspot();
-    }
-
-    public void joinHost(View view) {
-        //startActivity(new Intent(this, SenderClient.class));
-        startActivity(new Intent(this, JoinUI.class));
-        //startScanner();
-    }
-
-    private void startScanner() {
-        if (!PermissionHelper.checkIfHasPermission(this)) {
-            Log.d(TAG, "turnOnHotspot: permission not allowed");
-            PermissionHelper.askForPermission(this);
-            return;
-        }
-        if (scanner == null)
-            scanner = new IntentIntegrator(this);
-        scanner.setOrientationLocked(true);
-        scanner.setPrompt("Scan QR code to connect");
-        scanner.initiateScan();
+        turnOnHotspot();
     }
 
 
@@ -231,80 +193,21 @@ public class StartUI extends AppCompatActivity {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null) {
-            if (result.getContents() == null) {
-                Toast.makeText(this, "No Data Found", Toast.LENGTH_SHORT).show();
-            } else {
-                //showDialog(getString(R.string.verifyingQR));
-                String r = result.getContents();
-                /*Intent intent = new Intent();
-                intent.putExtra("RESULT", r);*/
-                ParseResult(r);
-            }
-            return;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PermissionHelper.SYSTEM_PERMISSION_REQ) {
-            turnOnHotspot();
-        } else if (requestCode == PermissionHelper.APP_SETTINGS_REQ) {
-            turnOnHotspot();
-        }
-    }
-
-    private void ParseResult(String r) {
-        if (r.contains("/")) {
-            String[] data = r.split("/");
-            String name = data[0];
-            String password = data[1];
-            WifiConfiguration configuration = getWifiConfig(name);
-            if (configuration == null) {
-                createWPAProfile(name, password);
-                //configuration = getWifiConfig(name);
-            } else {
-                wifiManager.disconnect();
-                wifiManager.enableNetwork(configuration.networkId, true);
-                wifiManager.reconnect();
-            }
-            //open file page
-            goToFiles();
-        }
-    }
-
-    private synchronized void createWPAProfile(String name, String password) {
-        WifiConfiguration configuration = new WifiConfiguration();
-        configuration.SSID = "\"" + name + "\"";
-        configuration.preSharedKey = "\"" + password + "\"";
-        configuration.priority = 1;
-        configuration.status = WifiConfiguration.Status.ENABLED;
-        int networkId = wifiManager.addNetwork(configuration);
-        wifiManager.disconnect();
-        wifiManager.enableNetwork(networkId, true);
-        wifiManager.reconnect();
-    }
-
-    private WifiConfiguration getWifiConfig(String name) {
-        WifiManager manager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return null;
-        }
-        List<WifiConfiguration> configurationList = manager.getConfiguredNetworks();
-        if (configurationList != null) {
-            for (WifiConfiguration wifiConfiguration : configurationList) {
-                if (wifiConfiguration.SSID != null && wifiConfiguration.SSID.equalsIgnoreCase(name))
-                    return wifiConfiguration;
-            }
-        }
-        return null;
-    }
-
-    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PermissionHelper.PERMISSION_REQ) {
             turnOnHotspot();
             return;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PermissionHelper.SYSTEM_PERMISSION_REQ) {
+            turnOnHotspot();
+        } else if (requestCode == PermissionHelper.APP_SETTINGS_REQ) {
+            turnOnHotspot();
         }
     }
 
@@ -334,10 +237,13 @@ public class StartUI extends AppCompatActivity {
     }
 
     public void goToFiles() {
-        startActivity(new Intent(this, MainUI.class));
+        Intent intent = new Intent(this, MainUI.class);
+        intent.putExtra("TYPE", MainUI.USER_TYPE.HOST);
+        startActivity(intent);
+        finish();
     }
 
-    /*@Override
+    @Override
     protected void onPause() {
         super.onPause();
         unregisterReceiver(receiver);
@@ -347,6 +253,6 @@ public class StartUI extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         registerReceiver(receiver, intentFilter);
-    }*/
+    }
 
 }

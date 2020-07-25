@@ -7,6 +7,8 @@ import android.net.wifi.WifiManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.mridx.share.ui.CreateUI;
+import com.mridx.share.ui.JoinUI;
 import com.mridx.share.ui.StartUI;
 import com.mridx.test.ui.Receive;
 import com.mridx.test.ui.ReceiveMulticast;
@@ -45,27 +47,15 @@ public class WiFiReceiver extends BroadcastReceiver {
             if (Log.isLoggable(TAG, Log.VERBOSE)) {
                 Log.v(TAG, "Wifi is now enabled");
             }
-            context.startService(new Intent(context, WiFiActiveService.class));
+            //context.startService(new Intent(context, WiFiActiveService.class));
         } else if ("android.net.wifi.WIFI_AP_STATE_CHANGED".equals(action)) {
-            Log.d(TAG, "onReceive: wifi ap changed");
-            if (context instanceof Receive) {
-                ((Receive) context).connectToServer();
+            if (context instanceof JoinUI) {
+                ((JoinUI) context).wifiConnected();
             }
-            if (context instanceof StartUI) {
-
-            }
-            if (context instanceof ReceiveMulticast)
-                Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show();
         } else if ("android.net.wifi.WIFI_HOTSPOT_CLIENTS_CHANGED".equals(action)) {
             Log.d(TAG, "onReceive: client changed");
-            if (context instanceof Test) {
-                ((Test) context).getConnectedClientList();
-            }
-            if (context instanceof SendMulticast) {
-                Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show();
-            }
-            if (context instanceof StartUI) {
-                ((StartUI) context).goToFiles();
+            if (context instanceof CreateUI) {
+                ((CreateUI) context).goToFiles();
             }
         }
     }

@@ -17,10 +17,21 @@ public class MainUI extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPagerAdapter viewPagerAdapter;
 
+    public static enum USER_TYPE {
+        HOST, CLIENT
+    }
+
+    public USER_TYPE userType;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_ui);
+
+
+        if (getIntent().getExtras() == null)
+            finish();
+        userType = (USER_TYPE) getIntent().getExtras().get("TYPE");
 
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
