@@ -10,6 +10,11 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.mridx.share.R;
 import com.mridx.share.adapter.ViewPagerAdapter;
+import com.mridx.share.fragment.AppFragment;
+import com.mridx.share.fragment.FileFragment;
+import com.mridx.share.fragment.MusicFragment;
+import com.mridx.share.fragment.PhotoFragment;
+import com.mridx.share.fragment.VideoFragment;
 
 public class MainUI extends AppCompatActivity {
 
@@ -39,11 +44,11 @@ public class MainUI extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new Fragment(R.layout.app_fragment), "APP"); // TODO: 23/07/20 change layout
-        viewPagerAdapter.addFragment(new Fragment(R.layout.photo_fragment), "PHOTO"); // TODO: 23/07/20 change layout
-        viewPagerAdapter.addFragment(new Fragment(R.layout.music_fragment), "MUSIC");
-        viewPagerAdapter.addFragment(new Fragment(R.layout.video_fragment), "VIDEO"); // TODO: 23/07/20 change layout
-        viewPagerAdapter.addFragment(new Fragment(R.layout.files_fragment), "FILE");
+        viewPagerAdapter.addFragment(new AppFragment(this), "APP");
+        viewPagerAdapter.addFragment(new PhotoFragment(), "PHOTO");
+        viewPagerAdapter.addFragment(new MusicFragment(), "MUSIC");
+        viewPagerAdapter.addFragment(new VideoFragment(), "VIDEO");
+        viewPagerAdapter.addFragment(new FileFragment(), "FILE");
 
         viewPager.setAdapter(viewPagerAdapter);
     }
