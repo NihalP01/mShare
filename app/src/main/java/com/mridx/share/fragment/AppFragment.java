@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +18,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.mridx.share.R;
 import com.mridx.share.adapter.AppAdapter;
 import com.mridx.share.data.AppData;
@@ -30,6 +35,9 @@ public class AppFragment extends Fragment {
     private Context context;
     private AppAdapter appAdapter;
     private RecyclerView appsHolder;
+    private MaterialCardView btmView;
+    private MaterialButton appSendBtn;
+    private MaterialCheckBox appCheckbox;
 
 
     private static final long MB = 1024 * 1024;
@@ -60,8 +68,20 @@ public class AppFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 4);
         appsHolder.setAdapter(appAdapter);
         appsHolder.setLayoutManager(gridLayoutManager);
+        btmView = view.findViewById(R.id.btmView);
+        appSendBtn = view.findViewById(R.id.appSendBtn);
+        appCheckbox = view.findViewById(R.id.appCheckbox);
+        appCheckbox.setOnCheckedChangeListener((compoundButton, b) -> appAdapter.setAllChecked(b));
 
         appAdapter.setAppList(installedApps());
+        appAdapter.setAppAdapterClicked(selectedList -> {
+            //if (selectedList.size() > 0)
+            showSendBtn(selectedList.size());
+        });
+    }
+
+    private void showSendBtn(int size) {
+        appSendBtn.setText(size == 0 ? "Send" : "Send (" + size + ")");
     }
 
     private void setupAdapter() {
@@ -79,7 +99,7 @@ public class AppFragment extends Fragment {
                 Drawable icon = packInfo.applicationInfo.loadIcon(context.getPackageManager());
                 //Log.d("kaku", "installedApps: " + packInfo.applicationInfo.sourceDir);
                 String apkPath = packInfo.applicationInfo.sourceDir;
-                appList.add(new AppData(appName, icon, apkPath, getFileSize(apkPath)));
+                appList.add(new AppData(appName, icon, apkPath, getFileSize(apkPath), false));
             }
         }
         return appList;

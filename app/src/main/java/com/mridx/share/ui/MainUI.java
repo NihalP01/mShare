@@ -35,11 +35,12 @@ public class MainUI extends AppCompatActivity {
 
 
         if (getIntent().getExtras() == null)
-            finish();
-        userType = (USER_TYPE) getIntent().getExtras().get("TYPE");
+            //finish();
+       // userType = (USER_TYPE) getIntent().getExtras().get("TYPE");
 
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
+        viewPager.setOffscreenPageLimit(5);
 
         tabLayout.setupWithViewPager(viewPager);
 

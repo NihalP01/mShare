@@ -40,6 +40,7 @@ import com.mridx.share.helper.PermissionHelper;
 import com.mridx.test.misc.WiFiReceiver;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StartUI extends AppCompatActivity {
@@ -69,6 +70,7 @@ public class StartUI extends AppCompatActivity {
         intentFilter.addAction("android.net.wifi.WIFI_HOTSPOT_CLIENTS_CHANGED");*/
 
 
+
     }
 
     public void startHost(View view) {
@@ -79,7 +81,7 @@ public class StartUI extends AppCompatActivity {
 
     public void joinHost(View view) {
         //startActivity(new Intent(this, SenderClient.class));
-        startActivity(new Intent(this, JoinUI.class));
+        startActivity(new Intent(this, /*JoinUI.class*/ MainUI.class));
         //startScanner();
     }
 
