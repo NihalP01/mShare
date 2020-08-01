@@ -2,18 +2,27 @@ package com.mridx.share.ui;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -24,10 +33,10 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -37,8 +46,8 @@ import com.google.zxing.integration.android.IntentResult;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.mridx.share.R;
 import com.mridx.share.helper.PermissionHelper;
-import com.mridx.test.misc.WiFiReceiver;
 
+import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +63,7 @@ public class StartUI extends AppCompatActivity {
     private IntentIntegrator scanner;
     private BroadcastReceiver receiver;
     private IntentFilter intentFilter;
+    private ShapeableImageView img;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +72,7 @@ public class StartUI extends AppCompatActivity {
 
         findViewById(R.id.createCard).setOnClickListener(this::startHost);
         findViewById(R.id.joinCard).setOnClickListener(this::joinHost);
+        img = findViewById(R.id.img);
 
         /*receiver = new WiFiReceiver();
         intentFilter = new IntentFilter();
@@ -69,9 +80,75 @@ public class StartUI extends AppCompatActivity {
         //intentFilter.addAction("android.net.wifi.WIFI_AP_STATE_CHANGED");
         intentFilter.addAction("android.net.wifi.WIFI_HOTSPOT_CLIENTS_CHANGED");*/
 
+        getAllAudioFromDevice(this);
 
 
     }
+
+    public void getAllAudioFromDevice(final Context context) {
+        ContentResolver contentResolver = context.getContentResolver();
+
+        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        //Uri uri = Uri.parse(Environment.getExternalStorageDirectory().getAbsolutePath());
+        int count = 0;
+
+        ArrayList<String> songs = new ArrayList<>();
+        ArrayList<byte[]> arts = new ArrayList<>();
+
+
+        Cursor cursor = contentResolver.query(
+                uri, // Uri
+                null,
+                null,
+                null,
+                null
+        );
+        MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int Title = cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME);
+
+                String songTitle = cursor.getString(Title);
+                String path = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
+                Log.d(TAG, "getAllAudioFromDevice: " + songTitle);
+                Log.d(TAG, "getAllAudioFromDevice: " + path);
+                File file = new File(path);
+                mediaMetadataRetriever.setDataSource(file.getAbsolutePath());
+                byte[] art = mediaMetadataRetriever.getEmbeddedPicture();
+                //arts.add(art);
+                setToImg(art);
+                songs.add(songTitle);
+                getAlbumArtUri(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
+                //setToBtn(getAlbumArtUri(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID))).toString());
+                //Log.d(TAG, "getAllAudioFromDevice: " + getAlbumArtUri(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID))).toString());
+            } while (cursor.moveToNext());
+
+        }
+
+        Log.d(TAG, "getAllAudioFromDevice: " + songs.size());
+
+
+    }
+
+    private void setToImg(byte[] art) {
+        if (art != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(art, 0, art.length);
+            img.setImageBitmap(bitmap);
+        }
+    }
+
+    public static String getAlbumArtUri(String albumId) {
+        Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
+        Uri uri = ContentUris.withAppendedId(sArtworkUri, Long.parseLong(albumId));
+        Log.d("kaku", "getAlbumArtUri: " + uri.toString());
+        return uri.toString();
+    }
+
+    private void setToBtn(String art) {
+        Bitmap bitmap = BitmapFactory.decodeFile(art);
+        img.setImageBitmap(bitmap);
+    }
+
 
     public void startHost(View view) {
         //startActivity(new Intent(this, /*SenderHost.class*/ MainUI.class));
@@ -350,5 +427,6 @@ public class StartUI extends AppCompatActivity {
         super.onResume();
         registerReceiver(receiver, intentFilter);
     }*/
+
 
 }
