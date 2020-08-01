@@ -6,12 +6,14 @@ public class AppData {
 
     private String appName, apkPath, apkSize;
     private Drawable appIcon;
+    private boolean selected;
 
-    public AppData(String appName, Drawable appIcon, String apkPath, String apkSize) {
+    public AppData(String appName, Drawable appIcon, String apkPath, String apkSize, boolean selected) {
         this.appName = appName;
         this.appIcon = appIcon;
         this.apkPath = apkPath;
         this.apkSize = apkSize;
+        this.selected = selected;
     }
 
     public String getAppName() {
@@ -28,5 +30,13 @@ public class AppData {
 
     public String getApkSize() {
         return apkSize;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }

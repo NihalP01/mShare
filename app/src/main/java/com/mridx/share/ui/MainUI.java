@@ -1,6 +1,7 @@
 package com.mridx.share.ui;
 
 import android.os.Bundle;
+import android.os.Environment;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,9 +13,13 @@ import com.mridx.share.R;
 import com.mridx.share.adapter.ViewPagerAdapter;
 import com.mridx.share.fragment.AppFragment;
 import com.mridx.share.fragment.FileFragment;
+import com.mridx.share.fragment.FilesListFragment;
 import com.mridx.share.fragment.MusicFragment;
 import com.mridx.share.fragment.PhotoFragment;
 import com.mridx.share.fragment.VideoFragment;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class MainUI extends AppCompatActivity {
 
@@ -35,11 +40,12 @@ public class MainUI extends AppCompatActivity {
 
 
         if (getIntent().getExtras() == null)
-            finish();
-        userType = (USER_TYPE) getIntent().getExtras().get("TYPE");
+            //finish();
+            // userType = (USER_TYPE) getIntent().getExtras().get("TYPE");
 
-        viewPager = findViewById(R.id.viewPager);
+            viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
+        viewPager.setOffscreenPageLimit(5);
 
         tabLayout.setupWithViewPager(viewPager);
 
@@ -51,5 +57,6 @@ public class MainUI extends AppCompatActivity {
         viewPagerAdapter.addFragment(new FileFragment(), "FILE");
 
         viewPager.setAdapter(viewPagerAdapter);
+
     }
 }
