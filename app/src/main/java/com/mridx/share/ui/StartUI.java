@@ -13,14 +13,12 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.Settings;
@@ -36,7 +34,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -80,7 +77,7 @@ public class StartUI extends AppCompatActivity {
         //intentFilter.addAction("android.net.wifi.WIFI_AP_STATE_CHANGED");
         intentFilter.addAction("android.net.wifi.WIFI_HOTSPOT_CLIENTS_CHANGED");*/
 
-        getAllAudioFromDevice(this);
+     /*   getAllAudioFromDevice(this);*/
 
 
     }
@@ -118,7 +115,10 @@ public class StartUI extends AppCompatActivity {
                 //arts.add(art);
                 setToImg(art);
                 songs.add(songTitle);
-                getAlbumArtUri(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
+
+               /* getAlbumArtUri(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));*/
+
+
                 //setToBtn(getAlbumArtUri(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID))).toString());
                 //Log.d(TAG, "getAllAudioFromDevice: " + getAlbumArtUri(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID))).toString());
             } while (cursor.moveToNext());
@@ -137,11 +137,11 @@ public class StartUI extends AppCompatActivity {
         }
     }
 
-    public static String getAlbumArtUri(String albumId) {
+    public static void getAlbumArtUri(String albumId) {
         Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
         Uri uri = ContentUris.withAppendedId(sArtworkUri, Long.parseLong(albumId));
         Log.d("kaku", "getAlbumArtUri: " + uri.toString());
-        return uri.toString();
+        uri.toString();
     }
 
     private void setToBtn(String art) {
