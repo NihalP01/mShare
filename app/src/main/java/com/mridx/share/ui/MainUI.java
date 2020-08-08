@@ -3,6 +3,7 @@ package com.mridx.share.ui;
 import android.os.Bundle;
 import android.os.Environment;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -10,7 +11,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.mridx.share.R;
+import com.mridx.share.adapter.FilesListAdapter;
 import com.mridx.share.adapter.ViewPagerAdapter;
+import com.mridx.share.data.FileData;
 import com.mridx.share.fragment.AppFragment;
 import com.mridx.share.fragment.FileFragment;
 import com.mridx.share.fragment.FilesListFragment;
@@ -18,14 +21,38 @@ import com.mridx.share.fragment.MusicFragment;
 import com.mridx.share.fragment.PhotoFragment;
 import com.mridx.share.fragment.VideoFragment;
 
+import org.jetbrains.annotations.NotNull;
+
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-public class MainUI extends AppCompatActivity {
+public class MainUI extends AppCompatActivity implements FilesListAdapter.OnAdapterItemClicked {
 
     public ViewPager viewPager;
     private TabLayout tabLayout;
     private ViewPagerAdapter viewPagerAdapter;
+
+
+    OnItemClickedListener onItemClickedListener;
+
+
+    public interface OnItemClickedListener {
+        void onClicked(FileData fileData);
+    }
+
+    public void setOnItemClickedListener(OnItemClickedListener onItemClickedListener) {
+        this.onItemClickedListener = onItemClickedListener;
+    }
+
+    OnBackPressed onBackPressed;
+
+    public interface OnBackPressed {
+        void onPressed();
+    }
+
+    public void setOnBackPressed(OnBackPressed onBackPressed) {
+        this.onBackPressed = onBackPressed;
+    }
 
     public static enum USER_TYPE {
         HOST, CLIENT
@@ -58,5 +85,20 @@ public class MainUI extends AppCompatActivity {
 
         viewPager.setAdapter(viewPagerAdapter);
 
+    }
+
+    @Override
+    public void onClicked(FileData fileData) {
+        onItemClickedListener.onClicked(fileData);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        if (viewPager.getCurrentItem() == 4)
+            onBackPressed.onPressed();
+        else
+            super.onBackPressed();
     }
 }

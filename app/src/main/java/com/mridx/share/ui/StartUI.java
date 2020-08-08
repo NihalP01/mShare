@@ -80,7 +80,7 @@ public class StartUI extends AppCompatActivity {
         //intentFilter.addAction("android.net.wifi.WIFI_AP_STATE_CHANGED");
         intentFilter.addAction("android.net.wifi.WIFI_HOTSPOT_CLIENTS_CHANGED");*/
 
-        getAllAudioFromDevice(this);
+        //getAllAudioFromDevice(this);
 
 
     }
