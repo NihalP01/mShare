@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.mridx.share.R
 import com.mridx.share.data.MusicData
 
-class MusicAdapter(private val musicList: List<MusicData>) : RecyclerView.Adapter<MusicAdapter.myViewHolder>() {
+class AudioAdapter(private val musicList: List<MusicData>) : RecyclerView.Adapter<AudioAdapter.myViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.music_view, parent, false)
@@ -37,8 +37,10 @@ class MusicAdapter(private val musicList: List<MusicData>) : RecyclerView.Adapte
             size.text = musicInfo.audioSize
 
             Log.d("myTag", musicInfo.title)
+            if (musicInfo.albumArt == null) {
 
-            Glide.with(itemView.context).load(musicInfo.albumArt).into(albumArt)
+
+            } else Glide.with(itemView.context).load(musicInfo.albumArt).into(albumArt)
         }
     }
 }

@@ -5,3 +5,8 @@ data class MusicData(
         var albumArt: String,
         var audioSize: String
 )
+data class VideoData(
+        var title: String,
+        var thumbnail: String,
+        var videoSize: String
+)
