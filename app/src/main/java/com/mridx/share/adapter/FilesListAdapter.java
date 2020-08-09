@@ -55,11 +55,12 @@ public class FilesListAdapter extends RecyclerView.Adapter<FilesListAdapter.View
 
     public void setFileList(ArrayList<FileData> fileList) {
         this.fileList = fileList;
+        //setHasStableIds(true);
         notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ShapeableImageView fileIconView;
+        private ShapeableImageView fileIconView, fileCheckbox;
         private MaterialTextView nameView, folderView, sizeView;
 
         public ViewHolder(@NonNull View itemView) {
@@ -68,6 +69,7 @@ public class FilesListAdapter extends RecyclerView.Adapter<FilesListAdapter.View
             folderView = itemView.findViewById(R.id.folderTextView);
             sizeView = itemView.findViewById(R.id.totalSizeTextView);
             fileIconView = itemView.findViewById(R.id.fileIconView);
+            fileCheckbox = itemView.findViewById(R.id.fileCheckbox);
         }
 
         public void bind(FileData fileData) {
@@ -77,20 +79,29 @@ public class FilesListAdapter extends RecyclerView.Adapter<FilesListAdapter.View
                 sizeView.setVisibility(View.GONE);
                 folderView.setText(fileData.getSubFiles() + " files");
             } else {
-                fileIconView.setImageDrawable(itemView.getContext().getDrawable(R.drawable.ic_file));
                 folderView.setVisibility(View.GONE);
                 sizeView.setVisibility(View.VISIBLE);
                 sizeView.setText(String.format("%.2f", fileData.getSizeInMB()) + "mb");
-                //MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
-                //mediaMetadataRetriever.setDataSource(itemView.getContext(), Uri.fromFile(new File(fileData.getPath())));
-                //byte[] data = mediaMetadataRetriever.getEmbeddedPicture();
-                //Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                //fileIconView.setImageBitmap(bitmap);
-                Glide.with(itemView.getContext()).asBitmap().load(new File(fileData.getPath())).placeholder(R.drawable.ic_file).into(fileIconView);
+                int res = getIcon(fileData.getExt());
+                //fileIconView.setImageResource(res);
+                Glide.with(itemView.getContext()).asBitmap().load(new File(fileData.getPath())).placeholder(res).into(fileIconView);
             }
-
+            int icon = fileData.isSelected() ? R.drawable.ic_selected : R.drawable.custom_checkbox;
+            fileCheckbox.setImageResource(icon);
+            itemView.findViewById(R.id.checkView).setOnClickListener(view -> {
+                fileData.setSelected(true);
+                notifyDataSetChanged();
+            });
             itemView.setOnClickListener(view -> onAdapterItemClicked.onClicked(fileData));
 
         }
+    }
+
+    private int getIcon(String ext) {
+        ext = ext.toLowerCase();
+        if (ext.equalsIgnoreCase("apk")) return R.drawable.ic_app;
+        if (ext.equalsIgnoreCase("pdf")) return R.drawable.ic_pdf;
+        if (ext.equalsIgnoreCase("")) return R.drawable.ic_file;
+        return R.drawable.ic_file;
     }
 }

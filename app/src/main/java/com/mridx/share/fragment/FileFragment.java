@@ -91,7 +91,7 @@ public class FileFragment extends Fragment implements MainUI.OnItemClickedListen
 
     @Override
     public Unit invoke(StorageData storageData) {
-        addFileFragment(new FileData(storageData.getPath(), storageData.getName(), null, null, storageData.getTotalSize(), 0));
+        addFileFragment(new FileData(storageData.getPath(), storageData.getName(), null, null, storageData.getTotalSize(), 0, false));
         return null;
     }
 }

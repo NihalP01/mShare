@@ -8,14 +8,16 @@ public class FileData {
     private FileType fileType;
     private Double sizeInMB;
     private int subFiles = 0;
+    private boolean selected = false;
 
-    public FileData(String path, String name, String ext, FileType fileType, Double sizeInMB, int subFiles) {
+    public FileData(String path, String name, String ext, FileType fileType, Double sizeInMB, int subFiles, boolean selected) {
         this.path = path;
         this.name = name;
         this.ext = ext;
         this.fileType = fileType;
         this.sizeInMB = sizeInMB;
         this.subFiles = subFiles;
+        this.selected = selected;
     }
 
     public String getPath() {
@@ -40,5 +42,13 @@ public class FileData {
 
     public int getSubFiles() {
         return subFiles;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }
