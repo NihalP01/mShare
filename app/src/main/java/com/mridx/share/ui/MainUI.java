@@ -1,9 +1,11 @@
 package com.mridx.share.ui;
 
 import android.os.Bundle;
+import android.os.Environment;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -11,9 +13,13 @@ import com.mridx.share.R;
 import com.mridx.share.adapter.ViewPagerAdapter;
 import com.mridx.share.fragment.AppFragment;
 import com.mridx.share.fragment.FileFragment;
+import com.mridx.share.fragment.FilesListFragment;
 import com.mridx.share.fragment.MusicFragment;
 import com.mridx.share.fragment.PhotoFragment;
 import com.mridx.share.fragment.VideoFragment;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class MainUI extends AppCompatActivity {
 

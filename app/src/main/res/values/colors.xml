@@ -14,6 +14,7 @@
 
     <color name="gray">#4D4C4C</color>
     <color name="lightGray">#4F5053</color>
+    <color name="lighterGray">#A0A1A3</color>
     <color name="darkGray">#2F2F2F</color>
 
     <color name="primary">#3F51B5</color>

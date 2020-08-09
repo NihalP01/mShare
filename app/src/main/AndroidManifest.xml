@@ -28,7 +28,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.FullScreen"
-        tools:overrideLibrary="com.google.zxing.client.android">
+        tools:overrideLibrary="com.google.zxing.client.android"
+        android:requestLegacyExternalStorage="true"
+        tools:targetApi="q">
         <activity android:name=".ui.StartUI">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
