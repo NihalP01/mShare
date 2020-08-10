@@ -81,7 +81,7 @@ public class FilesListAdapter extends RecyclerView.Adapter<FilesListAdapter.View
             } else {
                 folderView.setVisibility(View.GONE);
                 sizeView.setVisibility(View.VISIBLE);
-                sizeView.setText(String.format("%.2f", fileData.getSizeInMB()) + "mb");
+                sizeView.setText(String.format("%.1f", fileData.getSizeInMB()) + "MB");
                 int res = getIcon(fileData.getExt());
                 //fileIconView.setImageResource(res);
                 Glide.with(itemView.getContext()).asBitmap().load(new File(fileData.getPath())).placeholder(res).into(fileIconView);

@@ -4,15 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="10dp"
-    android:paddingTop="10dp"
-    android:paddingEnd="10dp"
-    android:paddingBottom="0dp">
+    android:padding="13dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/fileIconView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         app:layout_constraintBottom_toTopOf="@+id/mainDiv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
@@ -29,7 +26,7 @@
         android:layout_marginEnd="5dp"
         android:ellipsize="middle"
         android:singleLine="true"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/checkView"
         app:layout_constraintHorizontal_bias="0"
@@ -61,7 +58,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:text="4 MB"
-        android:textSize="12sp"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/checkView"
         app:layout_constraintHorizontal_bias="0"

@@ -2,7 +2,6 @@ package com.mridx.share.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +16,6 @@ import com.mridx.share.data.FileData;
 import com.mridx.share.data.StorageData;
 import com.mridx.share.ui.MainUI;
 import com.mridx.share.utils.FileType;
-
-import org.jetbrains.annotations.NotNull;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;

@@ -3,7 +3,6 @@ package com.mridx.share.fragment
 import android.annotation.SuppressLint
 import android.content.ContentUris
 import android.content.Context
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -25,7 +24,6 @@ class MusicFragment : Fragment() {
     val MB = (1024 * 1024).toDouble()
     val KB = 1024.toDouble()
     val df = DecimalFormat("#.##")
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -63,6 +61,7 @@ class MusicFragment : Fragment() {
                 val audioPath = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA))
                 Log.d("nihal", audioPath)
 
+
                 val albumArt = getAlbumart(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)))
                 audioList.add(MusicData(songTitle, albumArt!!, songSize!!))
             } while (cursor.moveToNext())
@@ -82,7 +81,6 @@ class MusicFragment : Fragment() {
             df.format(myValue / MB) + " MB"
         } else df.format(myValue / KB) + " KB"
     }
-
 }
 
 

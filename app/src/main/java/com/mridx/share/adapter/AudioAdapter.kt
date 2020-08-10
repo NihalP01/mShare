@@ -1,6 +1,5 @@
 package com.mridx.share.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,6 @@ class AudioAdapter(private val musicList: List<MusicData>) : RecyclerView.Adapte
     }
 
     override fun getItemCount(): Int {
-        Log.d("myTag", musicList.size.toString())
         return musicList.size
     }
 
@@ -35,12 +33,7 @@ class AudioAdapter(private val musicList: List<MusicData>) : RecyclerView.Adapte
         fun bind(musicInfo: MusicData) {
             title.text = musicInfo.title
             size.text = musicInfo.audioSize
-
-            Log.d("myTag", musicInfo.title)
-            if (musicInfo.albumArt == null) {
-
-
-            } else Glide.with(itemView.context).load(musicInfo.albumArt).into(albumArt)
+            Glide.with(itemView.context).load(musicInfo.albumArt).placeholder(R.drawable.ic_music).into(albumArt)
         }
     }
 }

@@ -10,12 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mridx.share.R
 import com.mridx.share.adapter.FilesListAdapter
-import com.mridx.share.data.FileData
-import com.mridx.share.ui.MainUI
 import com.mridx.share.utils.FileUtils
 import kotlinx.android.synthetic.main.files_list_fragment.*
-import java.lang.Exception
-import javax.crypto.SealedObject
 
 class FilesListFragment : Fragment() {
 
