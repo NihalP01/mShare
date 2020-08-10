@@ -101,7 +101,8 @@ public class FilesListAdapter extends RecyclerView.Adapter<FilesListAdapter.View
         ext = ext.toLowerCase();
         if (ext.equalsIgnoreCase("apk")) return R.drawable.ic_app;
         if (ext.equalsIgnoreCase("pdf")) return R.drawable.ic_pdf;
-        if (ext.equalsIgnoreCase("")) return R.drawable.ic_file;
+        if (ext.equalsIgnoreCase("zip")) return R.drawable.ic_zip;
+        if (ext.equalsIgnoreCase("mp3")) return R.drawable.ic_music;
         return R.drawable.ic_file;
     }
 }
