@@ -11,3 +11,8 @@ data class VideoData(
         var thumbnail: String,
         var videoSize: String
 )
+data class PhotoData(
+        val image: String,
+        val title: String,
+        val size: String
+)

@@ -15,7 +15,7 @@
             android:layout_height="@dimen/searchBoxHeight"
             android:layout_margin="@dimen/layoutMargin"
             app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="2dp"
+            app:cardCornerRadius="10dp"
             app:cardElevation="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,16 +58,11 @@
             android:id="@+id/photoHolder"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/layoutMargin"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="@dimen/layoutMargin"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView"
-            app:spanCount="3"
-            tools:itemCount="15"
             tools:listitem="@layout/photo_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

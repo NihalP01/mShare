@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp">
+    android:padding="10dp">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/albumThumb"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:id="@+id/photoThumb"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:src="@drawable/ic_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,31 +19,47 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/albumName"
+        android:id="@+id/photoTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:maxLength="20"
-        android:text="My Album"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/albumThumb"
-        app:layout_constraintStart_toStartOf="@+id/albumThumb"
-        app:layout_constraintTop_toBottomOf="@+id/albumThumb"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="15dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="photo title"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/photoThumb"
+        app:layout_constraintEnd_toStartOf="@+id/musicCheckBox"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/photoThumb"
+        app:layout_constraintTop_toTopOf="@+id/photoThumb"
         app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/albumImageCount"
+        android:id="@+id/imageSize"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:gravity="center"
-        android:text="250"
+        android:layout_marginTop="4dp"
+        android:text="4.5 MB"
         android:textColor="@android:color/tertiary_text_light"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/albumName"
-        app:layout_constraintStart_toStartOf="@+id/albumName"
-        app:layout_constraintTop_toBottomOf="@+id/albumName"
+        app:layout_constraintEnd_toEndOf="@+id/photoTitle"
+        app:layout_constraintStart_toStartOf="@+id/photoTitle"
+        app:layout_constraintTop_toBottomOf="@+id/photoTitle"
         app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/musicCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/custom_checkbox"
+        app:layout_constraintBottom_toBottomOf="@+id/photoThumb"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/photoThumb"
+        app:layout_constraintTop_toTopOf="@+id/photoThumb" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

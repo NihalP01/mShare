@@ -8,13 +8,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/lightWhite"
+        android:background="#EAEAEA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:padding="5dp"
-        >
+        android:padding="5dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/appIconView"
@@ -39,7 +38,7 @@
             app:layout_constraintStart_toEndOf="@+id/appIconView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:tint="@color/green" />
+            app:tint="@color/colorPrimary" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/appName"

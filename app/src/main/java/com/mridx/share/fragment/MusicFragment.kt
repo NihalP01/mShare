@@ -47,6 +47,7 @@ class MusicFragment : Fragment() {
                 null,
                 null,
                 null,
+                null,
                 null
         )
 

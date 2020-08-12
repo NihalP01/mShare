@@ -39,7 +39,6 @@ class VideoFragment : Fragment() {
         val contentResolver = context.contentResolver
         val uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
 
-
         val cursor = contentResolver.query(
                 uri,
                 null,
@@ -53,7 +52,6 @@ class VideoFragment : Fragment() {
                 val videoTitle = cursor.getString(title)
 
                 val videoPath = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA))
-                Log.d("nihal", videoPath)
 
                 val size = cursor.getColumnIndex(MediaStore.Video.Media.SIZE)
                 val videoSize = getVideoSize(cursor.getString(size))

@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/searchBoxHeight"
             android:layout_margin="20dp"
-            android:background="@color/white"
+            android:background="@drawable/rounded_searchbar"
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="10dp"
             android:elevation="2dp"
