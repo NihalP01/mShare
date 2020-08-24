@@ -1,12 +1,9 @@
 package com.mridx.share.ui;
 
 import android.os.Bundle;
-import android.os.Environment;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -16,15 +13,9 @@ import com.mridx.share.adapter.ViewPagerAdapter;
 import com.mridx.share.data.FileData;
 import com.mridx.share.fragment.AppFragment;
 import com.mridx.share.fragment.FileFragment;
-import com.mridx.share.fragment.FilesListFragment;
+import com.mridx.share.fragment.ImageFragment;
 import com.mridx.share.fragment.MusicFragment;
-import com.mridx.share.fragment.PhotoFragment;
 import com.mridx.share.fragment.VideoFragment;
-
-import org.jetbrains.annotations.NotNull;
-
-import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
 
 public class MainUI extends AppCompatActivity implements FilesListAdapter.OnAdapterItemClicked {
 
@@ -78,7 +69,7 @@ public class MainUI extends AppCompatActivity implements FilesListAdapter.OnAdap
 
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new AppFragment(this), "APP");
-        viewPagerAdapter.addFragment(new PhotoFragment(), "PHOTO");
+        viewPagerAdapter.addFragment(new ImageFragment(), "PHOTO");
         viewPagerAdapter.addFragment(new MusicFragment(), "MUSIC");
         viewPagerAdapter.addFragment(new VideoFragment(), "VIDEO");
         viewPagerAdapter.addFragment(new FileFragment(), "FILE");

@@ -16,3 +16,8 @@ data class PhotoData(
         val title: String,
         val size: String
 )
+data class ImageFolder(
+        val folderName: String,
+        val folderThumb: String,
+        val imageCount: String
+)

@@ -25,9 +25,9 @@ class PhotoAdapter(private val photoList: List<PhotoData>) : RecyclerView.Adapte
     override fun getItemCount() = photoList.size
 
     class PhotoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val image: ImageView = itemView.findViewById(R.id.photoThumb)
-        private val title: TextView = itemView.findViewById(R.id.photoTitle)
-        private val size: TextView = itemView.findViewById(R.id.imageSize)
+        private val image: ImageView = itemView.findViewById(R.id.folderThubm)
+        private val title: TextView = itemView.findViewById(R.id.folderTitle)
+        private val size: TextView = itemView.findViewById(R.id.noOfImages)
 
         fun bind(imageList: PhotoData) {
             title.text = imageList.title

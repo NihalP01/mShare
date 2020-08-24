@@ -27,14 +27,12 @@ class PhotoFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.photo_fragment, container, false)
-        val photoRecycler: RecyclerView = view.findViewById(R.id.photoHolder)
+        val photoRecycler: RecyclerView = view.findViewById(R.id.folderHolder)
         photoRecycler.apply {
             setHasFixedSize(true)
             adapter = PhotoAdapter(getPhotos(context))
             layoutManager = LinearLayoutManager(context)
         }
-        val photos = context?.let { getPhotos(it) }
-        Log.d("nihall", photos.toString())
         return view
     }
 
@@ -45,8 +43,8 @@ class PhotoFragment : Fragment() {
         val contentResolver = context.contentResolver
         val uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
 
-        val projection = arrayOf(MediaStore.MediaColumns.DATA, MediaStore.Images.Media.TITLE, MediaStore.Images.Media.SIZE, MediaStore.Images.Media.DATE_TAKEN)
-        val orderBy:String = MediaStore.MediaColumns.DATE_TAKEN + " DESC"
+        val projection = arrayOf(MediaStore.MediaColumns.DATA, MediaStore.Images.Media.TITLE, MediaStore.Images.Media.SIZE, MediaStore.Images.Media.DATE_TAKEN, MediaStore.Images.Media.BUCKET_DISPLAY_NAME)
+        val orderBy: String = MediaStore.MediaColumns.DATE_TAKEN + " DESC"
 
         val cursor = contentResolver.query(
                 uri,
@@ -59,6 +57,8 @@ class PhotoFragment : Fragment() {
             do {
 
                 val imagePath = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA))
+                val folderName = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME))
+                Log.d("myTag", "$folderName")
 
                 val imageTitle = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.TITLE))
                 val imageSize = getImageSize(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.SIZE)))
@@ -68,10 +68,11 @@ class PhotoFragment : Fragment() {
         }
         return photoList
     }
+
     private fun getImageSize(imageSize: String): String? {
         val myValue = imageSize.toDouble()
-        return if (myValue > MB){
-            df.format(myValue / MB)+ " MB"
-        }else df.format(myValue / KB)+ " KB"
+        return if (myValue > MB) {
+            df.format(myValue / MB) + " MB"
+        } else df.format(myValue / KB) + " KB"
     }
 }
