@@ -14,6 +14,7 @@ import com.mridx.share.R
 import com.mridx.share.adapter.ImageFolderAdapter
 import com.mridx.share.data.ImageFolder
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ImageFragment : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -50,9 +51,8 @@ class ImageFragment : Fragment(){
                 folderPath = folderPath + folderName + "/"
                 if(!picPaths.contains(folderPath)){
                     picPaths.add(folderPath)
-                    picFolders.add(ImageFolder(folderName, dataPath, "45"))
+                    picFolders.add(ImageFolder(folderName, dataPath, "5"))
                 }
-
 
             }while (cursor.moveToNext())
         }
